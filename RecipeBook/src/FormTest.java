@@ -142,6 +142,12 @@ public class FormTest{
 		frame.getContentPane().add(ingredients);
 		
 		JButton newRecipeButton = new JButton("New Recipe");
+		newRecipeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewRecipe.main(new String[] {Integer.toString(x)});
+    			frame.setVisible(false);
+			}
+		});
 		newRecipeButton.setBounds(280, 225, 119, 23);
 		frame.getContentPane().add(newRecipeButton);
 		
