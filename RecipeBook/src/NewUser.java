@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class NewUser {
 
@@ -56,7 +59,20 @@ public class NewUser {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		JLabel ErrorLabel = new JLabel("");
+		ErrorLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		ErrorLabel.setForeground(new Color(255, 0, 0));
+		ErrorLabel.setBounds(160, 31, 124, 14);
+		frame.getContentPane().add(ErrorLabel);
+		
 		userTextField = new JTextField();
+		userTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ErrorLabel.setText("");
+			}
+		});
 		userTextField.setBounds(168, 80, 86, 20);
 		frame.getContentPane().add(userTextField);
 		userTextField.setColumns(10);
@@ -96,7 +112,7 @@ public class NewUser {
 		            	
 		            }//end while
 		            if (verified)
-		            	System.out.println("Username taken");
+		            	ErrorLabel.setText("User name taken");
 		            else {
 		            	//do stuff
 		            	try (Connection con2 = DriverManager.getConnection(connectionUrl); Statement stmt2 = con.createStatement();) {
@@ -170,6 +186,7 @@ public class NewUser {
 			public void actionPerformed(ActionEvent e) {
 				userTextField.setText("");
 				passwordField.setText("");
+				ErrorLabel.setText("");
 			}
 		});
 		resetButton.setBounds(165, 197, 89, 23);
@@ -199,5 +216,7 @@ public class NewUser {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(168, 132, 86, 20);
 		frame.getContentPane().add(passwordField);
+		
+		
 	}
 }

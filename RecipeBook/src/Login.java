@@ -26,6 +26,9 @@ import javax.swing.JLabel;
 import java.awt.SystemColor;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login {
 
@@ -71,19 +74,40 @@ public class Login {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Error label
+		JLabel ErrorLabel = new JLabel("");
+		ErrorLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		ErrorLabel.setForeground(new Color(255, 0, 0));
+		ErrorLabel.setBounds(117, 72, 209, 20);
+		frame.getContentPane().add(ErrorLabel);
+		
+		submitButton = new JButton("Submit");
+		submitButton.setForeground(new Color(0, 0, 0));
+		submitButton.setBackground(new Color(245, 255, 250));
+		submitButton.setBounds(161, 165, 89, 23);
+		
 		userTextField = new JTextField();
+		userTextField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ErrorLabel.setText("");
+			}
+		});
 		userTextField.setBounds(164, 103, 86, 20);
 		userTextField.setColumns(10);
 		
 		userTextField.requestFocusInWindow();
 		
 		passwordField = new JPasswordField();
+		passwordField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ErrorLabel.setText("");
+			}
+		});
 		passwordField.setBounds(164, 134, 86, 20);
 		
-		submitButton = new JButton("Submit");
-		submitButton.setForeground(new Color(0, 0, 0));
-		submitButton.setBackground(new Color(245, 255, 250));
-		submitButton.setBounds(161, 165, 89, 23);
+		
 		
 		
 		
@@ -142,7 +166,8 @@ public class Login {
 		            	
 		            }//end while
 		            if (!verified)
-		            	System.out.println("Username or Password incorrect");
+		            	ErrorLabel.setText("Username or Password incorrect");
+		            	//System.out.println("Username or Password incorrect");
 		            
 		        }
 		        // Handle any errors that may have occurred.
@@ -166,7 +191,7 @@ public class Login {
 			public void actionPerformed(ActionEvent arg0) {
 				userTextField.setText("");
 				passwordField.setText("");
-				
+				ErrorLabel.setText("");
 			}
 		});
 		
@@ -191,6 +216,8 @@ public class Login {
 		frame.getContentPane().add(passwordField);
 		frame.getContentPane().add(submitButton);
 		frame.getContentPane().add(resetButton);
+		
+		
 		
 		frame.setLocationRelativeTo(null);
 	}//end initialize
