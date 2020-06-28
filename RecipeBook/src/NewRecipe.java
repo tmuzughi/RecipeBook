@@ -30,8 +30,6 @@ public class NewRecipe {
 	private JLabel IngredientsLabel;
 	private JLabel InstructionsLabel;
 	private JLabel SummaryLabel;
-	private JTextField CategoryBox;
-	private JLabel CategoryLabel;
 
 	/**
 	 * Launch the application.
@@ -163,7 +161,7 @@ public class NewRecipe {
 		        String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=RecipeBook;integratedSecurity=true";
 		        
 		        String recipeName = RecipeNameBox.getText();
-		        String category = CategoryBox.getText();
+		        //String category = CategoryBox.getText();
 		        String ingredients = IngredientsBox.getText();
 		        String instructions = InstructionsBox.getText();
 		        String description = DescriptionBox.getText();
@@ -194,7 +192,7 @@ public class NewRecipe {
 		            		
 				            String SQL2 = "insert into user" + x + "Recipes "
 				            		+ "(RecipeName, Category, Ingredients, RecipeTime, Difficulty, Summary, Steps) "
-				            		+ "values ('" + recipeName + "', '" + category + "', '" + ingredients + "', '"
+				            		+ "values ('" + recipeName + "', '" + "food" + "', '" + ingredients + "', '"
 				            		+ recipeTime + "', '" + difficulty + "', '" + description + "', '" + instructions + "');";
 				            try(ResultSet rs2 = stmt.executeQuery(SQL2);){
 				            //also do nothing
@@ -218,15 +216,6 @@ public class NewRecipe {
 		});
 		SubmitButton.setBounds(324, 227, 89, 23);
 		frame.getContentPane().add(SubmitButton);
-		
-		CategoryBox = new JTextField();
-		CategoryBox.setBounds(23, 150, 86, 20);
-		frame.getContentPane().add(CategoryBox);
-		CategoryBox.setColumns(10);
-		
-		CategoryLabel = new JLabel("Category");
-		CategoryLabel.setBounds(23, 135, 46, 14);
-		frame.getContentPane().add(CategoryLabel);
 	}
 
 }
