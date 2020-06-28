@@ -23,6 +23,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import java.awt.SystemColor;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class Login {
 
@@ -64,20 +67,26 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.inactiveCaption);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
 		userTextField = new JTextField();
 		userTextField.setBounds(164, 103, 86, 20);
-		frame.getContentPane().add(userTextField);
 		userTextField.setColumns(10);
+		
+		userTextField.requestFocusInWindow();
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(164, 134, 86, 20);
-		frame.getContentPane().add(passwordField);
 		
 		submitButton = new JButton("Submit");
+		submitButton.setForeground(new Color(0, 0, 0));
+		submitButton.setBackground(new Color(245, 255, 250));
+		submitButton.setBounds(161, 165, 89, 23);
+		
+		
+		
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -141,22 +150,18 @@ public class Login {
 		            e.printStackTrace();
 		        }
 			}
-		});//end action listener
-		
-		
-		
-		submitButton.setBounds(161, 165, 89, 23);
-		frame.getContentPane().add(submitButton);
+		});
 		
 		JLabel lblUser = new JLabel("User");
 		lblUser.setBounds(84, 106, 70, 14);
-		frame.getContentPane().add(lblUser);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(84, 137, 70, 14);
-		frame.getContentPane().add(lblPassword);
 		
 		resetButton = new JButton("Reset");
+		resetButton.setForeground(new Color(0, 0, 0));
+		resetButton.setBackground(new Color(245, 255, 250));
+		resetButton.setBounds(161, 199, 89, 23);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				userTextField.setText("");
@@ -164,10 +169,11 @@ public class Login {
 				
 			}
 		});
-		resetButton.setBounds(161, 199, 89, 23);
-		frame.getContentPane().add(resetButton);
 		
 		createButton = new JButton("Create New User");
+		createButton.setForeground(SystemColor.desktop);
+		createButton.setBackground(new Color(245, 255, 250));
+		createButton.setBounds(132, 25, 151, 31);
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -176,7 +182,16 @@ public class Login {
 				
 			}
 		});
-		createButton.setBounds(132, 25, 151, 31);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(userTextField);
 		frame.getContentPane().add(createButton);
+		frame.getContentPane().add(lblUser);
+		
+		frame.getContentPane().add(lblPassword);
+		frame.getContentPane().add(passwordField);
+		frame.getContentPane().add(submitButton);
+		frame.getContentPane().add(resetButton);
+		
+		frame.setLocationRelativeTo(null);
 	}//end initialize
 }

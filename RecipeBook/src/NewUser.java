@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class NewUser {
 
@@ -49,6 +51,7 @@ public class NewUser {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.inactiveCaption);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -59,6 +62,9 @@ public class NewUser {
 		userTextField.setColumns(10);
 		
 		JButton submitButton = new JButton("Submit");
+		submitButton.setBackground(new Color(245, 255, 250));
+		
+		frame.setLocationRelativeTo(null);
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -159,6 +165,7 @@ public class NewUser {
 		frame.getContentPane().add(submitButton);
 		
 		JButton resetButton = new JButton("Reset");
+		resetButton.setBackground(new Color(245, 255, 250));
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				userTextField.setText("");
@@ -177,6 +184,7 @@ public class NewUser {
 		frame.getContentPane().add(lblEnterPassword);
 		
 		JButton backButton = new JButton("Back");
+		backButton.setBackground(new Color(245, 255, 250));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

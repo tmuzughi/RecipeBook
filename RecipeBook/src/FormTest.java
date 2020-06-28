@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class FormTest{
 
@@ -61,6 +63,8 @@ public class FormTest{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(int x) {
+		
+		
 		//System.out.println(x);
 		String[] recipes = new String[100];
 		String[] difficulties = new String[100];
@@ -108,9 +112,11 @@ public class FormTest{
         }
 		
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.inactiveCaption);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
 		//RECIPE NAME
 		JTextArea recipeName = new JTextArea();
 		recipeName.setText(recipes[0]);
@@ -142,16 +148,18 @@ public class FormTest{
 		frame.getContentPane().add(ingredients);
 		
 		JButton newRecipeButton = new JButton("New Recipe");
+		newRecipeButton.setBackground(new Color(245, 255, 250));
 		newRecipeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NewRecipe.main(new String[] {Integer.toString(x)});
     			frame.setVisible(false);
 			}
 		});
-		newRecipeButton.setBounds(280, 225, 119, 23);
+		newRecipeButton.setBounds(323, 225, 101, 23);
 		frame.getContentPane().add(newRecipeButton);
 		
 		JButton logoutButton = new JButton("Logout");
+		logoutButton.setBackground(new Color(245, 255, 250));
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login.main(new String[0]);
@@ -185,6 +193,7 @@ public class FormTest{
 		
 		//NEXT BUTTON
 				JButton nextButton = new JButton("Next");
+				nextButton.setBackground(new Color(245, 255, 250));
 				nextButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						int counter = 0;
@@ -194,14 +203,14 @@ public class FormTest{
 								break;
 							}
 						}
-						if (counter != recipeLength[0])
+						if (counter != recipeLength[0]) {
 						recipeName.setText(recipes[counter]);
 						summary.setText(summaries[counter]);
 						instructions.setText(steps[counter]);
 						ingredients.setText(ingredientsArray[counter]);
 						Difficulty.setText(difficulties[counter]);
 						RecipeTime.setText(times[counter]);
-						
+						}
 					}
 				});
 				nextButton.setBounds(310, 12, 89, 23);
@@ -209,6 +218,7 @@ public class FormTest{
 				
 				//BACK BUTTON
 				JButton backButton = new JButton("Back");
+				backButton.setBackground(new Color(245, 255, 250));
 				backButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						int counter = recipeLength[0];
@@ -232,5 +242,72 @@ public class FormTest{
 				});
 				backButton.setBounds(37, 12, 89, 23);
 				frame.getContentPane().add(backButton);
+				
+				//DELETE BUTTON
+				JButton DeleteButton = new JButton("Delete");
+				DeleteButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						//DELETE
+						try (Connection con2 = DriverManager.getConnection(connectionUrl); Statement stmt2 = con2.createStatement();) {
+				            String SQL2 = "delete from user" + x + "Recipes "
+				            		+ "where RecipeName='" + recipeName.getText() + "';";
+				            
+				            //insert into Recipes(RecipeName, Category, Difficulty, RecipeTime)\r\n" + 
+				    		//"values('Blob2', 'Restaurant', 'Medium', 5);
+				            try (ResultSet rs1 = stmt2.executeQuery(SQL2);){
+				            	//do nothing
+				            } catch (SQLException ex2) {
+				            	//do more nothing
+				            }
+				            //refresh page
+				            FormTest.main(new String[] {Integer.toString(x)});
+	            			frame.setVisible(false);
+				        }
+				        // Handle any errors that may have occurred.
+				        catch (SQLException ex1) {
+				            ex1.printStackTrace();
+				        }
+					}
+				});
+				DeleteButton.setForeground(new Color(245, 255, 250));
+				DeleteButton.setBackground(new Color(128, 0, 0));
+				DeleteButton.setBounds(119, 225, 89, 23);
+				frame.getContentPane().add(DeleteButton);
+				
+				JButton EditButton = new JButton("Edit");
+				EditButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						//EDIT
+						try (Connection con2 = DriverManager.getConnection(connectionUrl); Statement stmt2 = con2.createStatement();) {
+				            String SQL2 = "update user" + x + "Recipes "
+				            		+ "set Ingredients='" + ingredients.getText() + "', "
+				            		+ "RecipeTime='" + RecipeTime.getText() + "', "
+				            		+ "Difficulty='" + Difficulty.getText() + "', "
+				            		+ "Summary='" + summary.getText() + "', "
+				            		+ "Steps='" + instructions.getText() + "' "
+				            		+ "where RecipeName='" + recipeName.getText() + "';";
+				            
+				            //insert into Recipes(RecipeName, Category, Difficulty, RecipeTime)\r\n" + 
+				    		//"values('Blob2', 'Restaurant', 'Medium', 5);
+				            try (ResultSet rs1 = stmt2.executeQuery(SQL2);){
+				            	//do nothing
+				            } catch (SQLException ex2) {
+				            	//do more nothing
+				            }
+				            //refresh page
+				            FormTest.main(new String[] {Integer.toString(x)});
+	            			frame.setVisible(false);
+				        }
+				        // Handle any errors that may have occurred.
+				        catch (SQLException ex1) {
+				            ex1.printStackTrace();
+				        }
+					}
+				});
+				EditButton.setBackground(new Color(245, 255, 250));
+				EditButton.setBounds(233, 225, 67, 23);
+				frame.getContentPane().add(EditButton);
+				frame.setLocationRelativeTo(null);
+				
 	}
 }

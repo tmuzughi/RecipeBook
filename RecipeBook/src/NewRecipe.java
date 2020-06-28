@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class NewRecipe {
 
@@ -65,9 +67,12 @@ public class NewRecipe {
 	 */
 	private void initialize(int x) {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.inactiveCaption);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		frame.setLocationRelativeTo(null);
 		
 		RecipeNameBox = new JTextField();
 		RecipeNameBox.setBounds(23, 25, 86, 20);
@@ -98,6 +103,7 @@ public class NewRecipe {
 		
 		//BACK BUTTON
 		BackButton = new JButton("Back");
+		BackButton.setBackground(new Color(245, 255, 250));
 		BackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FormTest.main(new String[] {Integer.toString(x)});
@@ -133,6 +139,7 @@ public class NewRecipe {
 		
 		//RESET BUTTON
 		ResetButton = new JButton("Reset");
+		ResetButton.setBackground(new Color(245, 255, 250));
 		ResetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RecipeNameBox.setText("");
@@ -148,6 +155,7 @@ public class NewRecipe {
 		
 		//SUBMIT BUTTON
 		SubmitButton = new JButton("Submit");
+		SubmitButton.setBackground(new Color(245, 255, 250));
 		SubmitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//check for recipe name in RecipeBook
