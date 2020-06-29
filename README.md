@@ -19,4 +19,4 @@ Features
 <h5>* Update existing entries</h5>
 <h5>* Delete unwanted entries</h5>
 <h3>Images</h3>
-![](Images/Login.PNG)
+<img src="Images/Login.PNG">
