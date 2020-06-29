@@ -19,4 +19,11 @@ Features
 <h5>* Update existing entries</h5>
 <h5>* Delete unwanted entries</h5>
 <h3>Images</h3>
+<h5>Login</h5>
 <img src="Images/Login.PNG">
+<h5>Main Form</h5>
+<img src="Images/Form.PNG">
+<h5>New Recipe</h5>
+<img src="Images/New Recipe.PNG">
+<h5>New User</h5>
+<img src="Images/New User.PNG">
